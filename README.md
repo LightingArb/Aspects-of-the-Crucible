@@ -427,7 +427,7 @@
 ```bash
 git clone https://github.com/LightingArb/mix_skill_people
 cd mix_skill_people
-bash setup.sh
+bash skill-extraction/setup.sh
 ```
 
 安裝完成後，打開 Claude Code，對 AI 說「創建人格」就能開始。
@@ -444,8 +444,6 @@ bash setup.sh
 .
 ├── README.md
 ├── 指令.md
-├── package.json
-├── setup.sh
 ├── 人格資料夾/
 │   ├── .gitkeep
 │   └── 001_xxx_xxx.md
@@ -455,9 +453,11 @@ bash setup.sh
     ├── external-repos/
     │   └── .gitkeep
     ├── generate_skill_extraction.py
+    ├── package.json
     ├── skill-extraction-analysis.md
     ├── skill-extraction-spec.md
     ├── skill-persona.md
+    ├── setup.sh
     └── raw-cards/
         ├── gstack/
         └── superpowers/
@@ -467,9 +467,9 @@ bash setup.sh
 
 - `指令.md`
   - 客戶實際操作入口，AI 讀這份就知道怎麼合成人格、修改人格、比較人格與啟動研究模式
-- `package.json`
+- `skill-extraction/package.json`
   - 預裝 Playwright 的 Node 設定，讓 clone 完的 repo 可以直接安裝研究工具
-- `setup.sh`
+- `skill-extraction/setup.sh`
   - 一鍵安裝腳本，會安裝 Playwright chromium 與 `chrome-devtools-mcp`
 - `skill-extraction/generate_skill_extraction.py`
   - 產生器腳本，負責掃描來源 repo、整理內容、輸出卡片與索引

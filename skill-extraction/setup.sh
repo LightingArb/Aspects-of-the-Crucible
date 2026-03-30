@@ -1,4 +1,5 @@
 #!/bin/bash
+cd "$(dirname "$0")"
 echo "正在安裝研究工具..."
 
 # 安裝 Node 依賴 + Playwright chromium

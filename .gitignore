@@ -13,6 +13,8 @@ __pycache__/
 # Node
 node_modules/
 package-lock.json
+skill-extraction/node_modules/
+skill-extraction/package-lock.json
 
 # Playwright
 playwright-report/
