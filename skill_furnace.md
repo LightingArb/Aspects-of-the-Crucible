@@ -202,6 +202,48 @@ AI 執行任何操作前，必須先宣告當前模式：
 | 日期 | 操作 | repo | 原因 |
 |------|------|------|------|
 | 2026-03-30 | 初始建立 | 全部 15 個 | v1.0.0 初始清單 |
+| 2026-03-31 | 新增待評估 | 8 個候選 repo | GPT deep research + Claude 篩選驗證，待下次重編時評估納入 |
+
+### 待評估 repo 候選清單
+
+> 以下 repo 經 GPT deep research 推薦 + Claude 篩選 + 星數/內容驗證後保留。
+> **狀態：僅記錄，尚未納入 config.json。** 下次重編時逐個評估是否 enabled。
+> 標記 ⚠ 的表示需要擴充 scan_targets 才能有效抽取。
+
+#### 確定納入（社群驗證強）
+
+| Repo | 星數 | 類型 | 目標人格 | 核心價值 | 備註 |
+|------|------|------|---------|---------|------|
+| [wshobson/agents](https://github.com/wshobson/agents) | ~32.6K | agent-like (plugin) | #203 | 72 plugins、112 agents、146 skills、16 orchestrators，agents/commands/skills 三件套 | 最接近現有 compiler 可吃格式 |
+| [VoltAgent/awesome-claude-code-subagents](https://github.com/VoltAgent/awesome-claude-code-subagents) | ~8.5K | agent-like (subagents) | #203 | 100+ subagents，meta-orchestration（coordinator、organizer），YAML frontmatter 可抽 | ⚠ 需擴 scan_targets 到 categories/**/*.md |
+| [basecamp/house-skills](https://github.com/basecamp/house-skills) | 企業 repo | skill (meta) | #213 + compiler | skill-crafting + trust boundaries + ralph-lisa-loop（plan→implement→review） | Basecamp/37signals 出品，也可補 compiler 安全規範 |
+
+#### 觀察中（低星或新 repo，但內容結構與 compiler 相容）
+
+| Repo | 星數 | 類型 | 目標人格 | 核心價值 | 備註 |
+|------|------|------|---------|---------|------|
+| [shawnpang/startup-founder-skills](https://github.com/shawnpang/startup-founder-skills) | 新 repo | skill | #204 | 50 skills，startup-context 統一上下文，有技能依賴圖，基於 marketingskills 改的 | 格式與 compiler 直接相容 |
+| [tjboudreaux/cc-skills-vc-fundraising](https://github.com/tjboudreaux/cc-skills-vc-fundraising) | ~51 | agent-like | #204 | /pitch-review、/build-narrative、/qa-prep + 15 Thinking Frameworks | 星少但 agents/commands/skills 結構對 |
+| [maigentic/stratarts](https://github.com/maigentic/stratarts) | ~11 | skill (commands) | #204 | 27 skills 含 financial-model / GTM / pitch-deck-builder，支援 context chaining | 有推薦 workflow 可抽 |
+| [nimrodfisher/data-analytics-skills](https://github.com/nimrodfisher/data-analytics-skills) | 新 repo | skill | #211 | 31 skills 覆蓋 DA workflow 全流程（data quality / analysis / documentation / communication） | 可能讓 #211 從 skill-pack 升級為完整人格 |
+| [SankaiAI/crushdataai-agent](https://github.com/SankaiAI/crushdataai-agent) | 新 repo | skill (workflow) | #211 | Context-Building Protocol（先問再分析）、10 分析 workflows、400+ patterns | 符合「保守可驗證」風格 |
+
+#### 明確不納入
+
+| Repo | 原因 |
+|------|------|
+| yamz8/open-ceo | 1 star，無社群驗證 |
+| openclaw/skills | 供應鏈風險：官方 README 警告可能含惡意 skills |
+| microsoft/autogen | framework 型，核心在 docs 不在 md，compiler 無法抽取 |
+| openai/swarm | educational，examples 目錄，compiler 無法抽取 |
+| crewAI / MetaGPT / CAMEL / langgraph | 全部 framework 型，離 compiler 可處理格式太遠 |
+| great-expectations / dbt-core / airflow | framework 型，compiler 無法抽取 |
+| smartnews/claude-skills | 星數不明，snapshot 非持續維護 |
+| AutumnsGrove/ClaudeSkills | 星數不明，內容與已有 anthropics/skills 高度重疊 |
+
+#### #203 解鎖備忘
+
+目前停止條件是 agent_cards=0。納入 wshobson/agents + VoltAgent 後，若仍為 0，考慮改為多信號判定（agent_cards > 0 或 orchestrator_cards > 0 或含 handoff/coordinator 關鍵字命中）。此為下次重編時的決策點，不是現在要改的。
 
 ---
 
